@@ -125,22 +125,27 @@ const Hero = () => {
         </a>
       </div>
 
-      <div>
-        <h2 className='mt-50 pl-20 flex justify-start mx-30 mt-20 text-3xl font-bold'>
-          I have knowledge about ,
+      <div className='mt-20 px-4'>
+        <h2 className='text-3xl font-bold text-center md:text-left md:pl-20'>
+          I have knowledge about,
         </h2>
-      </div>
-      <div className='ml-20 text-left text-lg sm:text-xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-green-500 to-blue-600 px-4 md:px-0 mt-2'>
-        <Typewriter
-          words={['Open-source. ', 'Real-world projects.', 'Hands-on experience.', 'Open-source repositories on GitHub.']}
-          loop={true}
-          cursor
-          cursorStyle='|'
-          typeSpeed={80}
-          deleteSpeed={50}
-          delaySpeed={1000}
-          cursorColor='white'
-        />
+        <div className='text-center md:text-left md:pl-20 text-lg sm:text-xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-green-500 to-blue-600 mt-2'>
+          <Typewriter
+            words={[
+              'Open-source.',
+              'Real-world projects.',
+              'Hands-on experience.',
+              'Open-source repositories on GitHub.'
+            ]}
+            loop={true}
+            cursor
+            cursorStyle='|'
+            typeSpeed={80}
+            deleteSpeed={50}
+            delaySpeed={1000}
+            cursorColor='white'
+          />
+        </div>
       </div>
 
       {isPopupOpen && (
