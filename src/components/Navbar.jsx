@@ -1,14 +1,11 @@
 import React, { useEffect, useState, useRef } from 'react';
 import { Menu, X } from 'lucide-react';
 
-const Navbar = ({ darkMode, setDarkMode }) => {
+const Navbar = ({ isPopupOpen, setIsPopupOpen }) => {
   const [activeSection, setActiveSection] = useState('home');
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-
-  const [isPopupOpen, setIsPopupOpen] = useState(false);
   const [formData, setFormData] = useState({ name: '', email: '', message: '' });
   const [submitting, setSubmitting] = useState(false);
-  const [showSuccess, setShowSuccess] = useState(false);
   const popupRef = useRef();
 
   const togglePopup = () => {
@@ -49,8 +46,6 @@ const Navbar = ({ darkMode, setDarkMode }) => {
       if (response.ok) {
         setFormData({ name: '', email: '', message: '' });
         setIsPopupOpen(false);
-        setShowSuccess(true);
-        setTimeout(() => setShowSuccess(false), 3000);
       } else {
         alert('Something went wrong. Please try again.');
       }
@@ -79,7 +74,8 @@ const Navbar = ({ darkMode, setDarkMode }) => {
   }, []);
 
   const linkClass = (id) =>
-    `block md:inline hover:text-blue-400 transition-colors duration-200 ${activeSection === id ? 'text-blue-400 font-semibold' : 'text-white'
+    `block md:inline hover:text-blue-400 transition-colors duration-200 ${
+      activeSection === id ? 'text-blue-400 font-semibold' : 'text-white'
     }`;
 
   const toggleMenu = () => setIsMenuOpen(!isMenuOpen);
@@ -87,12 +83,6 @@ const Navbar = ({ darkMode, setDarkMode }) => {
 
   return (
     <nav className="fixed top-0 left-0 w-full z-50 backdrop-blur-md bg-black/70 shadow-md text-white">
-      {showSuccess && (
-        <div className="fixed top-5 left-1/2 transform -translate-x-1/2 z-50 bg-blue-400 text-white px-6 py-2 rounded-full shadow-lg transition-opacity duration-300">
-          ✅ Message sent successfully!
-        </div>
-      )}
-
       {/* Contact Popup */}
       {isPopupOpen && (
         <div className="fixed inset-0 pt-20 z-50 flex items-start justify-center backdrop-blur-sm bg-black/30">
@@ -147,11 +137,7 @@ const Navbar = ({ darkMode, setDarkMode }) => {
       )}
 
       <div className="max-w-7xl mx-auto px-6 py-3 flex justify-between items-center">
-        <a href="#home" className="text-xl font-bold">
-          Goutam Patra
-        </a>
-
-        {/* Desktop Menu */}
+        <a href="#home" className="text-xl font-bold">Goutam Patra</a>
         <div className="hidden md:flex space-x-6 items-center">
           <a href="#home" className={linkClass('home')}>Home</a>
           <a href="#aboutme" className={linkClass('aboutme')}>About Me</a>
@@ -165,14 +151,11 @@ const Navbar = ({ darkMode, setDarkMode }) => {
             Reach Out
           </button>
         </div>
-
-        {/* Mobile Hamburger */}
         <button onClick={toggleMenu} className="md:hidden text-white">
           {isMenuOpen ? <X size={28} /> : <Menu size={28} />}
         </button>
       </div>
 
-      {/* Mobile Menu */}
       {isMenuOpen && (
         <div className="md:hidden px-6 py-4 bg-black/90 text-white space-y-4">
           <a href="#home" className={linkClass('home')} onClick={closeMenu}>Home</a>
@@ -180,10 +163,9 @@ const Navbar = ({ darkMode, setDarkMode }) => {
           <a href="#skills" className={linkClass('skills')} onClick={closeMenu}>Skills</a>
           <a href="#projects" className={linkClass('projects')} onClick={closeMenu}>Projects</a>
           <a href="#contact" className={linkClass('contact')} onClick={closeMenu}>Contact</a>
-          {/* Reach Out button removed from mobile menu */}
           <button
             onClick={togglePopup}
-            className=" bg-gradient-to-r from-green-400 to-blue-500 text-white px-4 py-1 rounded-full hover:scale-105 transition-transform duration-300"
+            className="bg-gradient-to-r from-green-400 to-blue-500 text-white px-4 py-1 rounded-full hover:scale-105 transition-transform duration-300"
           >
             Reach Out
           </button>
